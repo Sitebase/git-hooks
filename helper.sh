@@ -11,7 +11,7 @@ CROSS=`printf ${RED}'✘'${WHITE}`
 # Char art
 HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-function helloworld {
+helloworld() {
     echo "usage: git timetrack command [options]"
     echo ""
     echo "    -s, --start           start/continue counting time spent"
@@ -23,37 +23,37 @@ function helloworld {
     echo "    addhook               adds commit-msg hook to the project"
 }
 
-function base_dir {
+base_dir() {
 	echo "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
 }
 
-function hooks_dir {
+hooks_dir() {
 	echo "$(base_dir)hooks/"
 }
 
-function modules_dir {
+modules_dir() {
 	echo "$(base_dir)hooks/modules/"
 }
 
-function addons_dir {
+addons_dir() {
 	echo "$(base_dir)hooks/modules/"
 }
 
-function h1() {
+h1() {
 	echo "\n${WHITE}$1 ...\n"
 }
 
-function fail() {
+fail() {
 	echo "\t"${CROSS} ${GREY}$1${WHITE}
 }
 
-function ok() {
+ok() {
 	echo "\t"${CHECK} ${GREY}$1${WHITE}
 }
 
 # Function to get a list of files that will be committed by extension
 # you can for example do "$(commit_files js css)" to get a list of js and css files that wil lbe commited
-function commit_files() {
+commit_files() {
 	
 	if [ $# -eq 0 ] ; then
 	    echo $(git diff-index --name-only --diff-filter=ACM --cached HEAD --)
@@ -69,9 +69,9 @@ function commit_files() {
 	echo $(git diff-index --name-only --diff-filter=ACM --cached HEAD -- | grep -P "$regex")
 }
 
-function count_commit_files() {
+count_commit_files() {
 	echo $(commit_files $@) | wc -w | tr -d ' '
 }
 
 # Load config
-source $(base_dir)config.sh
+. $(base_dir)config.sh

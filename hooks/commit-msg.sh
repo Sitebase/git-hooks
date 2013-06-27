@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$HOME/.hooks/helper.sh"
+. "$HOME/.hooks/helper.sh"
 
 HOOK_ERROR=0
 MESSAGE=$(cat $1)

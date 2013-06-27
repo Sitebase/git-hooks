@@ -1,5 +1,5 @@
 #!/bin/sh
-source "$HOME/.hooks/helper.sh"
+. "$HOME/.hooks/helper.sh"
 
 HOOK_ERROR=0
 
@@ -8,7 +8,7 @@ echo ${WHITE}
 for module in $pre_commit_modules; do
     module_path="$(modules_dir)$module"
     [ ! -e $module_path ] && continue
-    source "$(modules_dir)$module"
+    . "$(modules_dir)$module"
     if [ $? -eq 1 ] ; then
         HOOK_ERROR=1
     fi

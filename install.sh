@@ -1,4 +1,4 @@
-source "helper.sh"
+. "helper.sh"
 
 TMP_DIR=`mktemp -d /tmp/sitebase.hooks.XXXXXXXXXX`
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
