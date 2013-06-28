@@ -1,3 +1,11 @@
+# Get the absolute path of the script that has been called.
+SCRIPT_PATH="$0"
+while [ -h "$SCRIPT_PATH" ]; do SCRIPT_PATH=`readlink "$SCRIPT_PATH"`; done
+
+# Use our own name ( helper.sh ) as a marker for the git-hooks root
+ROOT_DIR=$(dirname "$SCRIPT_PATH")
+while [ ! -f "$ROOT_DIR/helper.sh" ] && [ ! "." == "$ROOT_DIR" ]; do ROOT_DIR=$(dirname "$ROOT_DIR"); done
+
 # Colors
 RED=`printf '\033[1;31m'`
 GREEN=`printf '\033[1;32m'`
@@ -24,7 +32,7 @@ helloworld() {
 }
 
 base_dir() {
-	echo "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
+	echo "$ROOT_DIR/"
 }
 
 hooks_dir() {
@@ -72,6 +80,11 @@ commit_files() {
 count_commit_files() {
 	echo $(commit_files $@) | wc -w | tr -d ' '
 }
+
+if [ "." == "$ROOT_DIR" ]; then
+	fail "Could not locate git-hooks root directory."
+	exit 1
+fi
 
 # Load config
 . $(base_dir)config.sh
