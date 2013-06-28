@@ -1,0 +1,44 @@
+#!/bin/sh
+SCRIPT_PATH="$0"
+while [ -h "$SCRIPT_PATH" ]; do SCRIPT_PATH=`readlink "$SCRIPT_PATH"`; done
+. "$(dirname $SCRIPT_PATH)/helper.sh"
+
+REPO=`pwd`
+
+# Validations
+REPO_GIT_FOLDER="$REPO/.git/"
+[ ! -d $REPO_GIT_FOLDER ] && echo "${CROSS}${RED} The path you provided doesn't seem to be a Git repository because it doesn't contain a .git folder.${WHITE}" && exit 1
+
+enable() {
+	echo "Install hooks"
+	# Create symlinks
+	echo "- Create symlinks to the hooks repo ..."
+	ln -s "$(hooks_dir)pre-commit.sh" "$REPO_GIT_FOLDER/hooks/pre-commit"
+	ln -s "$(hooks_dir)post-commit.sh" "$REPO_GIT_FOLDER/hooks/post-commit"
+	ln -s "$(hooks_dir)commit-msg.sh" "$REPO_GIT_FOLDER/hooks/commit-msg"
+}
+
+disable() {
+	# Remove existing hooks
+	echo "- Remove existing hooks ..."
+	rm "$REPO_GIT_FOLDER/hooks/post-commit"
+	rm "$REPO_GIT_FOLDER/hooks/pre-commit"
+	rm "$REPO_GIT_FOLDER/hooks/commit-msg"
+}
+
+usage() {
+	echo "usage: git hooks [enable|disable]"
+}
+
+case "$1" in
+	"enable")
+		disable
+		enable
+	;;
+	"disable")
+		disable
+	;;
+	*)
+		usage
+	;;
+esac
