@@ -1,7 +1,7 @@
 #!/bin/bash
 SCRIPT_PATH="$0"
 while [ -h "$SCRIPT_PATH" ]; do SCRIPT_PATH=`readlink "$SCRIPT_PATH"`; done
-source "$(dirname $SCRIPT_PATH)/../helper.sh"
+. "$(dirname $SCRIPT_PATH)/../helper.sh"
 
 HOOK_ERROR=0
 MESSAGE=$(cat $1)
