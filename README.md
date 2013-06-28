@@ -49,6 +49,7 @@ Of course from time to time it will happen that a check fails but actually you n
 This project is made possible due to the efforts of these fine people:
 
 [Wim Mostmans](http://twitter.com/Sitebase) - Original author and maintainer
+[Jorgen Evens](https://twitter.com/JorgenEvens)
 
 # License
 
