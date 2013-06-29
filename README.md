@@ -21,10 +21,14 @@ Git clone the repo in your home folder in .hooks directory:
 >cd ~<br />
 >git clone git@github.com:Sitebase/git-hooks.git .hooks
 
+Create a link to the git-hooks script in /usr/bin
+
+>ln -s ~/.hooks/git-hooks /usr/bin/git-hooks
+
 Now to install the hooks on your repository
 
->cd ~/.hooks
->./install.sh path/to/your/repository/
+> cd /path/to/my/repo
+> git hooks enable
 
 And that's it. 
 If you now do a commit the needed commit checks will be run for that specific file extension.
@@ -41,7 +45,6 @@ Of course from time to time it will happen that a check fails but actually you n
 
 # Todo
 
-* Make it possible to install hooks dir where you want
 * Make PHP mess detection module
 * Make PHP check style module
 
