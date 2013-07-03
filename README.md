@@ -19,7 +19,7 @@ For the moment we perform the following checks:
 Git clone the repo in your home folder in .hooks directory:
 
 >cd ~<br />
->git clone git@github.com:Sitebase/git-hooks.git .hooks
+>git clone https://github.com/Sitebase/git-hooks.git .hooks
 
 Create a link to the git-hooks script in /usr/bin
 
