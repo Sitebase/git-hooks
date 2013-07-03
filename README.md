@@ -47,6 +47,7 @@ Of course from time to time it will happen that a check fails but actually you n
 
 * Make PHP mess detection module
 * Make PHP check style module
+* Enable/disable modules separately. `git hooks module disable phplint.sh`. Maybe use `git config key value` and `git config --get key`
 
 # Contributors
 This project is made possible due to the efforts of these fine people:
