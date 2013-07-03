@@ -27,7 +27,7 @@ Create a link to the git-hooks script in /usr/bin
 
 Now to install the hooks on your repository
 
-> cd /path/to/my/repo
+> cd /path/to/my/repo<br />
 > git hooks enable
 
 And that's it. 
