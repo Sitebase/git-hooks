@@ -2,6 +2,7 @@
 SCRIPT_PATH="$0"
 while [ -h "$SCRIPT_PATH" ]; do SCRIPT_PATH=`readlink "$SCRIPT_PATH"`; done
 . "$(dirname $SCRIPT_PATH)/helper.sh"
+. "$(dirname $SCRIPT_PATH)/config.sh"
 
 REPO=`pwd`
 
@@ -30,6 +31,14 @@ usage() {
 	echo "usage: git hooks [enable|disable]"
 }
 
+module_list() {
+	echo $pre_commit_modules | tr ' ' '\n'
+}
+
+module_usage() {
+	echo "usage: git hooks module [list]"
+}
+
 case "$1" in
 	"enable")
 		disable
@@ -37,6 +46,16 @@ case "$1" in
 	;;
 	"disable")
 		disable
+	;;
+	"module")
+		case "$2" in
+			"list")
+				module_list
+			;;
+			*)
+				module_usage
+			;;
+		esac
 	;;
 	*)
 		usage
