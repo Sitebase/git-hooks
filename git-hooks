@@ -22,9 +22,9 @@ enable() {
 disable() {
 	# Remove existing hooks
 	echo "- Remove existing hooks ..."
-	rm "$REPO_GIT_FOLDER/hooks/post-commit"
-	rm "$REPO_GIT_FOLDER/hooks/pre-commit"
-	rm "$REPO_GIT_FOLDER/hooks/commit-msg"
+	rm "$REPO_GIT_FOLDER/hooks/post-commit" 2> /dev/null
+	rm "$REPO_GIT_FOLDER/hooks/pre-commit" 2> /dev/null
+	rm "$REPO_GIT_FOLDER/hooks/commit-msg" 2> /dev/null
 }
 
 usage() {
