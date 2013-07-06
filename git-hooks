@@ -31,14 +31,6 @@ usage() {
 	echo "usage: git hooks [enable|disable]"
 }
 
-module_list() {
-	echo $pre_commit_modules | tr ' ' '\n'
-}
-
-module_usage() {
-	echo "usage: git hooks module [list]"
-}
-
 case "$1" in
 	"enable")
 		disable
@@ -47,17 +39,13 @@ case "$1" in
 	"disable")
 		disable
 	;;
-	"module")
-		case "$2" in
-			"list")
-				module_list
-			;;
-			*)
-				module_usage
-			;;
-		esac
-	;;
 	*)
-		usage
+		addon=$1
+		if [ `type -t  $1` == "function" ]; then
+			shift
+			$addon $@
+		else
+			usage
+		fi
 	;;
 esac

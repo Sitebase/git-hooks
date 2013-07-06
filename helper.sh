@@ -44,7 +44,7 @@ modules_dir() {
 }
 
 addons_dir() {
-	echo "$(base_dir)hooks/modules/"
+	echo "$(base_dir)addons/"
 }
 
 h1() {
@@ -88,3 +88,8 @@ fi
 
 # Load config
 . $(base_dir)config.sh
+
+# Load addons
+for module in `ls $(addons_dir)*.sh 2> /dev/null`; do
+	. $module
+done
