@@ -57,6 +57,7 @@ ok() {
 	echo "\t"${CHECK} ${GREY}$1${WHITE}
 }
 
+# String helpers
 padRight() {
 	input=$1
 	length=$2
@@ -77,6 +78,15 @@ padRight() {
 
 trim() {
 	echo $@
+}
+
+# Config helpers
+config_get() {
+	echo $(git config "$1" 2> /dev/null)
+}
+
+config_set() {
+	git config "$1" "$2"
 }
 
 # Function to get a list of files that will be committed by extension
