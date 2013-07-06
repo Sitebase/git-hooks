@@ -41,7 +41,7 @@ case "$1" in
 	;;
 	*)
 		addon=$1
-		if [ `type -t  $1` == "function" ]; then
+		if [ "$(type -t  $1)" == "function" ]; then
 			shift
 			$addon $@
 		else
