@@ -34,7 +34,7 @@ module_list() {
 }
 
 module_usage() {
-	echo "usage: git hooks module [list]"
+	echo "usage: git hooks module [list|[enable|disable] module]"
 }
 
 module_available() {
