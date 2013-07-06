@@ -52,17 +52,28 @@ module_is_enabled() {
 }
 
 module_enabled() {
-	echo "$(git config ${MODULE_CONFIG}.enabled 2> /dev/null)"
+	echo "$(config_get ${MODULE_CONFIG}.enabled)"
 }
 
 module_enable() {
 	enabled="$(module_enabled) $1"
 	enabled=$(trim "$enabled")
-	git config "${MODULE_CONFIG}.enabled" "$enabled"
+	config_set "${MODULE_CONFIG}.enabled" "$enabled"
 }
 
 module_disable() {
 	enabled=$( echo " $(module_enabled) " | sed "s/ $1 / /" )
 	enabled=$(trim "$enabled")
-	git config "${MODULE_CONFIG}.enabled" "$enabled"
+	config_set "${MODULE_CONFIG}.enabled" "$enabled"
 }
+
+module_firstuse() {
+	if [ -z "$(config_get ${MODULE_CONFIG}.configured)" ]; then
+		module_enable debug.sh
+		module_enable prevent-master-commit.sh
+		module_enable prevent-merge-marker-commits.sh
+		config_set "${MODULE_CONFIG}.configured" "true"
+	fi
+}
+
+module_firstuse
