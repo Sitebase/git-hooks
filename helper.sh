@@ -16,6 +16,8 @@ GREY=`printf '\033[1;36m'`
 CHECK=`printf ${GREEN}'✔'${WHITE}`
 CROSS=`printf ${RED}'✘'${WHITE}`
 
+CONFIG="git-hooks"
+
 # Char art
 HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
@@ -39,10 +41,6 @@ hooks_dir() {
 	echo "$(base_dir)hooks/"
 }
 
-modules_dir() {
-	echo "$(base_dir)hooks/modules/"
-}
-
 addons_dir() {
 	echo "$(base_dir)addons/"
 }
@@ -57,6 +55,28 @@ fail() {
 
 ok() {
 	echo "\t"${CHECK} ${GREY}$1${WHITE}
+}
+
+padRight() {
+	input=$1
+	length=$2
+	char=$3
+	i=${#input}
+
+	if [ -z $char ]; then
+		char=" "
+	fi
+
+	while [ $i -lt $length ]; do
+		input="$input$char"
+		i=${#input}
+	done
+
+	echo "$input"
+}
+
+trim() {
+	echo $@
 }
 
 # Function to get a list of files that will be committed by extension
