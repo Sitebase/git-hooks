@@ -56,9 +56,11 @@ module_enabled() {
 }
 
 module_enable() {
-	enabled="$(module_enabled) $1"
-	enabled=$(trim "$enabled")
-	config_set "${MODULE_CONFIG}.enabled" "$enabled"
+	if [ $(module_is_enabled $1) -eq 0 ]; then
+		enabled="$(module_enabled) $1"
+		enabled=$(trim "$enabled")
+		config_set "${MODULE_CONFIG}.enabled" "$enabled"
+	fi
 }
 
 module_disable() {
