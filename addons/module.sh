@@ -38,7 +38,7 @@ module_usage() {
 }
 
 module_available() {
-	echo `ls $(module_dir) | xargs -l1 basename`
+	echo `ls $(module_dir) | xargs -L1 basename`
 }
 
 module_is_enabled() {
