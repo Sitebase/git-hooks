@@ -2,15 +2,25 @@ if [ $(count_commit_files js) -eq 0 ] ; then
 	return 0
 fi
 
+REPO_ROOT_JSHINTRC=$(pwd)"/.jshintrc"
+
+if [ -f $REPO_ROOT_JSHINTRC ] ; then
+	JSHINTRC=$REPO_ROOT_JSHINTRC
+else
+	JSHINTRC=$(base_dir)".jshintrc"
+fi
+
+echo $JSHINTRC
+
 JSHINT="jshint"
 
 h1 "JSHint module"
 
-ERROR=0
+ERROR=1
 for file in $(commit_files js); do
-    if $JSHINT --config=$(base_dir)jshint.json $file 2>&1 | grep 'error' >/dev/null ; then
+    if $JSHINT --config=$JSHINTRC $file 2>&1 | grep 'error' >/dev/null ; then
         fail $file
-        $JSHINT --config=$(base_dir)jshint.json $file | sed "s/^/         ${GREY}--> /" | sed '$ d' | sed '$ d'
+        $JSHINT --config=$JSHINTRC $file | sed "s/^/         ${GREY}--> /" | sed '$ d' | sed '$ d'
         ERROR=1
     else
     	ok $file
