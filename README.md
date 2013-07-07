@@ -14,6 +14,14 @@ For the moment we perform the following checks:
 * Check for merge markers
 * Commit message must at least be 8 characters
 
+# Modules
+
+Some extra information about some of the modules
+
+## JSHint
+
+You can overwrite the default jshint config by placing a .jshintrc file in the root of your repository.
+
 # Install
 
 Git clone the repo in your home folder in .hooks directory:
