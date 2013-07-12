@@ -41,6 +41,25 @@ Now to install the hooks on your repository
 And that's it. 
 If you now do a commit the needed commit checks will be run for that specific file extension.
 
+# Modules
+Modules currently only run when the pre-commit hook is called.
+
+## Listing modules
+An overview of the installed modules and their current status can be retrieved using `git hooks module list`.
+
+## Enabling and disabling modules
+These modules can be enabled and disabled using `git hooks module [enabled|disable] module_name`.
+
+# Addons
+Addons will be loaded into git-hooks whenever the `helper.sh` script is included, they reside in the `addons` folder.
+
+To include your own addon, simply add a shell script to the folder and it will be loaded.
+
+## Addon convention
+Addons should have their functions start with a fixed prefix. For example `my_addon` as prefix will result in functions like `my_addon_usage`.
+
+Providing a function with only the prefix as name will allow you to use it on the commandline. For example `git hooks my_addon`
+
 # Update
 
 Just run `git pull` and all your projects that use hooks are up to date.
@@ -55,7 +74,6 @@ Of course from time to time it will happen that a check fails but actually you n
 
 * Make PHP mess detection module
 * Make PHP check style module
-* Enable/disable modules separately. `git hooks module disable phplint.sh`. Maybe use `git config key value` and `git config --get key`
 
 # Contributors
 This project is made possible due to the efforts of these fine people:

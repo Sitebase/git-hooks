@@ -22,21 +22,13 @@ enable() {
 disable() {
 	# Remove existing hooks
 	echo "- Remove existing hooks ..."
-	rm "$REPO_GIT_FOLDER/hooks/post-commit"
-	rm "$REPO_GIT_FOLDER/hooks/pre-commit"
-	rm "$REPO_GIT_FOLDER/hooks/commit-msg"
+	rm "$REPO_GIT_FOLDER/hooks/post-commit" 2> /dev/null
+	rm "$REPO_GIT_FOLDER/hooks/pre-commit" 2> /dev/null
+	rm "$REPO_GIT_FOLDER/hooks/commit-msg" 2> /dev/null
 }
 
 usage() {
 	echo "usage: git hooks [enable|disable]"
-}
-
-module_list() {
-	echo $pre_commit_modules | tr ' ' '\n'
-}
-
-module_usage() {
-	echo "usage: git hooks module [list]"
 }
 
 case "$1" in
@@ -47,17 +39,13 @@ case "$1" in
 	"disable")
 		disable
 	;;
-	"module")
-		case "$2" in
-			"list")
-				module_list
-			;;
-			*)
-				module_usage
-			;;
-		esac
-	;;
 	*)
-		usage
+		addon=$1
+		if [ "$(type -t  $1)" == "function" ]; then
+			shift
+			$addon $@
+		else
+			usage
+		fi
 	;;
 esac

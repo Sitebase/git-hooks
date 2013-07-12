@@ -7,10 +7,10 @@ HOOK_ERROR=0
 
 echo ${WHITE}
 
-for module in $pre_commit_modules; do
-    module_path="$(modules_dir)$module"
+for module in $(module_enabled); do
+    module_path="$(module_dir)$module"
     [ ! -e $module_path ] && continue
-    . "$(modules_dir)$module"
+    . "$(module_dir)$module"
     if [ $? -eq 1 ] ; then
         HOOK_ERROR=1
     fi
