@@ -10,8 +10,6 @@ else
 	JSHINTRC=$(base_dir)".jshintrc"
 fi
 
-echo $JSHINTRC
-
 JSHINT="jshint"
 
 h1 "JSHint module"
