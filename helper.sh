@@ -16,6 +16,8 @@ GREY=`printf '\033[1;36m'`
 CHECK=`printf ${GREEN}'✔'${WHITE}`
 CROSS=`printf ${RED}'✘'${WHITE}`
 
+CONFIG="git-hooks"
+
 # Char art
 HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
@@ -39,12 +41,8 @@ hooks_dir() {
 	echo "$(base_dir)hooks/"
 }
 
-modules_dir() {
-	echo "$(base_dir)hooks/modules/"
-}
-
 addons_dir() {
-	echo "$(base_dir)hooks/modules/"
+	echo "$(base_dir)addons/"
 }
 
 h1() {
@@ -57,6 +55,38 @@ fail() {
 
 ok() {
 	echo "\t"${CHECK} ${GREY}$1${WHITE}
+}
+
+# String helpers
+padRight() {
+	input=$1
+	length=$2
+	char=$3
+	i=${#input}
+
+	if [ -z $char ]; then
+		char=" "
+	fi
+
+	while [ $i -lt $length ]; do
+		input="$input$char"
+		i=${#input}
+	done
+
+	echo "$input"
+}
+
+trim() {
+	echo $@
+}
+
+# Config helpers
+config_get() {
+	echo $(git config "$1" 2> /dev/null)
+}
+
+config_set() {
+	git config "$1" "$2"
 }
 
 # Function to get a list of files that will be committed by extension
@@ -88,3 +118,8 @@ fi
 
 # Load config
 . $(base_dir)config.sh
+
+# Load addons
+for module in `ls $(addons_dir)*.sh 2> /dev/null`; do
+	. $module
+done
