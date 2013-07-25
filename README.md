@@ -13,6 +13,7 @@ For the moment we perform the following checks:
 * Prevent commit on master (We work with git flow so commit to the master is a big no no)
 * Check for merge markers
 * Commit message must at least be 8 characters
+* Check for uncommented console.log calls in javascript files which can break your code in older browsers like IE
 
 # Modules
 
