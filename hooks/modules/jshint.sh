@@ -16,7 +16,7 @@ JSHINT="jshint"
 
 h1 "JSHint module"
 
-ERROR=1
+ERROR=0
 for file in $(commit_files js); do
     if $JSHINT --config=$JSHINTRC $file 2>&1 | grep 'error' >/dev/null ; then
         fail $file
