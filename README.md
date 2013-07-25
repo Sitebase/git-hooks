@@ -21,7 +21,7 @@ Some extra information about some of the modules
 ## JSHint
 
 You can overwrite the default jshint config by placing a .jshintrc file in the root of your repository.
-Git hooks also supports the use of `.jshintignore` in the root folder of your repo.
+Git hooks also supports the use of `.jshintignore in the root folder of your repo.
 
 # Install
 
