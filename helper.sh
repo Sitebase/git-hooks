@@ -104,7 +104,7 @@ commit_files() {
 		extensions="${extensions}(${extension})|"
 	done
 	regex="\.(${extensions%?})$"
-	echo $(git diff-index --name-only --diff-filter=ACM --cached HEAD -- | grep -P "$regex")
+	echo $(git diff-index --name-only --diff-filter=ACM --cached HEAD -- | grep -E "$regex")
 }
 
 count_commit_files() {
